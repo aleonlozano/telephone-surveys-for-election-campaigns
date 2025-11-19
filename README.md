@@ -53,7 +53,7 @@ django_twilio_survey/
 │  │     ├─ contact_list.html
 │  │     └─ call_list.html
 │  └─ admin.py           # Registro en el admin de Django
-├─ .env                  # Variables de entorno (NO subir a git)
+├─ .env                  # Variables de entorno
 ├─ requirements.txt
 ├─ manage.py
 └─ README.md
