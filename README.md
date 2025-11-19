@@ -1,5 +1,3 @@
-Perfecto, te armo un README.md completo para este proyecto, en español, listo para pegar en la raíz del repo.
-
 # Panel de encuestas telefónicas con Django + Twilio
 
 Este proyecto es un **panel web en Django** para lanzar **llamadas telefónicas automáticas** usando **Twilio Programmable Voice**, hacer una **pregunta de encuesta** y registrar la respuesta del encuestado (por teclado o por voz) junto con un **puntaje de lealtad**.
