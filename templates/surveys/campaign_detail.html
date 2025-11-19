@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Detalle campaña{% endblock %}
+{% block content %}
+<h2>{{ campaign.name }}</h2>
+<p><strong>Candidato:</strong> {{ campaign.candidate_name }}</p>
+<p><strong>Descripción:</strong> {{ campaign.description|default:"(Sin descripción)" }}</p>
+<p><strong>Activa:</strong> {{ campaign.is_active|yesno:"Sí,No" }}</p>
+
+<form method="post" action="{% url 'surveys:launch_campaign' campaign.pk %}" class="mb-3">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Lanzar llamadas a todos los contactos</button>
+</form>
+
+<h3>Llamadas de la campaña</h3>
+<table class="table table-sm table-hover">
+    <thead>
+        <tr>
+            <th>Contacto</th>
+            <th>Estado</th>
+            <th>Preferencia</th>
+            <th>Lealtad</th>
+            <th>Creada</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for call in calls %}
+        <tr>
+            <td>{{ call.contact }}</td>
+            <td>{{ call.status }}</td>
+            <td>{{ call.preference|default:"-" }}</td>
+            <td>{% if call.loyalty_score %}{{ call.loyalty_score }}{% else %}-{% endif %}</td>
+            <td>{{ call.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Todavía no hay llamadas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

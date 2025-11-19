@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Contactos{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Contactos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Creado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in contacts %}
+                <tr>
+                    <td>{{ c.name|default:"-" }}</td>
+                    <td>{{ c.phone_number }}</td>
+                    <td>{{ c.created_at }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">Sin contactos.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h2>Nuevo contacto</h2>
+        <form method="post" class="card card-body">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

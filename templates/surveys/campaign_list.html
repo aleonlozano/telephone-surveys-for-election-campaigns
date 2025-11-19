@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Campañas{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Campañas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Candidato</th>
+                    <th>Activa</th>
+                    <th>Creada</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in campaigns %}
+                <tr>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.candidate_name }}</td>
+                    <td>{{ c.is_active|yesno:"Sí,No" }}</td>
+                    <td>{{ c.created_at }}</td>
+                    <td><a href="{% url 'surveys:campaign_detail' c.pk %}" class="btn btn-sm btn-primary">Ver</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">No hay campañas creadas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h2>Nueva campaña</h2>
+        <form method="post" class="card card-body">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
